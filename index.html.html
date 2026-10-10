@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kopi Candu — Sekali Coba, Bikin Candu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="image_slot.js"></script>
+<style>
+:root{
+  --navy:#0E1B3D;
+  --navy-2:#16285A;
+  --navy-3:#24397A;
+  --yellow:#FFC531;
+  --yellow-soft:#FFE9A8;
+  --cream:#FFF8EC;
+  --white:#FDFCF9;
+  --ink:#0E1B3D;
+  --muted:#5B6584;
+  --line:rgba(14,27,61,.12);
+  --caramel:#C7803A;
+  --wa:#25D366;
+  --display:'Bricolage Grotesque',system-ui,sans-serif;
+  --body:'Plus Jakarta Sans',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased;line-height:1.55}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:var(--display);line-height:1.02;letter-spacing:-.02em;text-wrap:balance}
+p{text-wrap:pretty}
+.wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:16px;padding:16px 26px;border-radius:999px;border:0;cursor:pointer;transition:transform .2s cubic-bezier(.3,1.6,.5,1),box-shadow .2s,background .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn-yellow{background:var(--yellow);color:var(--navy);box-shadow:0 6px 0 #D99F12}
+.btn-yellow:hover{box-shadow:0 8px 0 #D99F12}
+.btn-ghost{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,.3)}
+.btn-ghost:hover{border-color:var(--yellow);color:var(--yellow)}
+.wa-ico{width:20px;height:20px;flex:none}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:50;background:rgba(14,27,61,.92);backdrop-filter:blur(12px);color:var(--white)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{font-family:var(--display);font-weight:800;font-size:24px;display:flex;align-items:center;gap:10px;letter-spacing:-.02em}
+.logo-mark{width:34px;height:34px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;color:var(--navy);font-size:18px}
+.nav-links{display:flex;gap:30px;font-weight:600;font-size:15px}
+.nav-links a{opacity:.8;transition:opacity .2s,color .2s}
+.nav-links a:hover{opacity:1;color:var(--yellow)}
+.nav-cta{padding:11px 20px;font-size:14px;box-shadow:0 4px 0 #D99F12}
+@media(max-width:860px){.nav-links{display:none}}
+
+/* HERO */
+.hero{background:var(--navy);color:var(--white);position:relative;overflow:hidden;padding:64px 0 120px}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1.5px,transparent 1.5px);background-size:26px 26px;pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,197,49,.14);color:var(--yellow);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;padding:8px 14px;border-radius:999px}
+.eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--yellow);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.3}}
+.hero h1{font-size:clamp(52px,7.4vw,104px);font-weight:800;margin:22px 0 22px}
+.hero h1 .hl{color:var(--yellow);position:relative;white-space:nowrap}
+.hero h1 .hl svg{position:absolute;left:0;bottom:-6px;width:100%;height:16px}
+.hero p.lead{font-size:19px;color:rgba(253,252,249,.75);max-width:500px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+.hero-meta{display:flex;gap:34px;margin-top:44px;padding-top:28px;border-top:1px solid rgba(255,255,255,.12)}
+.hero-meta b{display:block;font-family:var(--display);font-size:30px;color:var(--yellow);line-height:1}
+.hero-meta span{font-size:13px;color:rgba(253,252,249,.6)}
+.hero-visual{position:relative}
+.hero-visual image-slot{width:100%;aspect-ratio:4/5;display:block;background:var(--navy-2)}
+.price-badge{position:absolute;left:-28px;bottom:48px;background:var(--yellow);color:var(--navy);border-radius:50%;width:132px;height:132px;display:grid;place-items:center;text-align:center;transform:rotate(-12deg);box-shadow:0 14px 30px rgba(0,0,0,.25);animation:float 4s ease-in-out infinite}
+.price-badge small{display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.price-badge b{font-family:var(--display);font-size:34px;line-height:1}
+.hero-tag{position:absolute;right:-14px;top:36px;background:var(--white);color:var(--navy);padding:12px 16px;border-radius:16px;font-weight:700;font-size:14px;box-shadow:0 14px 30px rgba(0,0,0,.25);display:flex;align-items:center;gap:10px;animation:float 4s ease-in-out infinite reverse}
+.hero-tag i{font-style:normal;width:30px;height:30px;border-radius:50%;background:var(--yellow-soft);display:grid;place-items:center}
+@keyframes float{50%{translate:0 -10px}}
+@media(max-width:900px){.hero .wrap{grid-template-columns:1fr}.price-badge{left:10px}.hero-tag{right:10px}}
+
+/* marquee */
+.marquee{background:var(--yellow);color:var(--navy);overflow:hidden;transform:rotate(-2deg);margin:-44px -20px 0;position:relative;z-index:2;border-block:3px solid var(--navy)}
+.marquee-track{display:flex;gap:40px;padding:16px 0;width:max-content;animation:scroll 30s linear infinite;font-family:var(--display);font-weight:800;font-size:26px;text-transform:uppercase;letter-spacing:-.01em}
+.marquee-track span{display:flex;align-items:center;gap:40px;white-space:nowrap}
+.marquee-track span::after{content:"✦";font-size:20px}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* SECTION BASE */
+section{padding:110px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:52px;flex-wrap:wrap}
+.kicker{font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--caramel);margin-bottom:14px;display:block}
+.sec-head h2{font-size:clamp(38px,5vw,64px);font-weight:800;max-width:640px}
+.sec-head p{max-width:380px;color:var(--muted);font-size:17px}
+
+/* VALUES */
+.values{background:var(--white)}
+.val-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.val{background:var(--cream);border-radius:28px;padding:30px 26px 32px;position:relative;transition:transform .3s,background .3s,color .3s;border:1.5px solid var(--line)}
+.val:hover{transform:translateY(-6px);background:var(--navy);color:var(--white)}
+.val:hover p{color:rgba(253,252,249,.7)}
+.val-num{font-family:var(--display);font-weight:800;font-size:15px;color:var(--caramel)}
+.val-ico{width:58px;height:58px;border-radius:18px;background:var(--yellow);display:grid;place-items:center;font-size:26px;margin:26px 0 24px;color:var(--navy)}
+.val h3{font-size:24px;font-weight:700;margin-bottom:10px}
+.val p{color:var(--muted);font-size:15px;transition:color .3s}
+.val.feature{background:var(--yellow);border-color:var(--yellow)}
+.val.feature .val-ico{background:var(--navy);color:var(--yellow)}
+.val.feature .big{font-family:var(--display);font-weight:800;font-size:44px;line-height:1;margin-bottom:6px}
+@media(max-width:960px){.val-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.val-grid{grid-template-columns:1fr}}
+
+/* MENU */
+.menu{background:var(--cream);position:relative}
+.tabs{display:inline-flex;background:var(--white);border:1.5px solid var(--line);padding:6px;border-radius:999px;position:relative}
+.tab{position:relative;z-index:1;border:0;background:none;font:700 16px var(--body);color:var(--muted);padding:13px 28px;border-radius:999px;cursor:pointer;transition:color .25s;display:flex;align-items:center;gap:8px}
+.tab .count{font-size:12px;background:rgba(14,27,61,.08);padding:2px 8px;border-radius:99px;transition:background .25s}
+.tab.active{color:var(--white)}
+.tab.active .count{background:var(--yellow);color:var(--navy)}
+.tab-pill{position:absolute;top:6px;bottom:6px;left:6px;background:var(--navy);border-radius:999px;transition:all .35s cubic-bezier(.4,1.3,.5,1)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px}
+.card{background:var(--white);border-radius:26px;padding:12px;border:1.5px solid var(--line);display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s;animation:cardIn .5s both}
+.card:hover{transform:translateY(-6px);box-shadow:0 22px 40px -18px rgba(14,27,61,.35)}
+@keyframes cardIn{from{opacity:0;transform:translateY(18px)}}
+.card-img{position:relative}
+.card image-slot{width:100%;aspect-ratio:1/1;display:block;background:var(--yellow-soft)}
+.card.nonkopi image-slot{background:#DCE4F7}
+.card-tag{position:absolute;top:12px;left:12px;background:var(--navy);color:var(--yellow);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;border-radius:99px;pointer-events:none;z-index:2}
+.card-body{padding:18px 10px 8px;display:flex;flex-direction:column;flex:1}
+.card h3{font-size:22px;font-weight:700;letter-spacing:-.01em}
+.card .desc{font-size:14px;color:var(--muted);margin:6px 0 18px;flex:1}
+.card-foot{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.price{font-family:var(--display);font-weight:800;font-size:24px}
+.price small{font-size:14px;font-weight:700;color:var(--muted);margin-right:2px}
+.order{display:inline-flex;align-items:center;gap:7px;background:var(--navy);color:var(--white);font-weight:700;font-size:13px;padding:11px 14px;border-radius:99px;transition:background .2s,color .2s}
+.order:hover{background:var(--yellow);color:var(--navy)}
+.order .wa-ico{width:16px;height:16px}
+
+/* TESTIMONI */
+.testi{background:var(--navy);color:var(--white);overflow:hidden}
+.testi .kicker{color:var(--yellow)}
+.testi .sec-head p{color:rgba(253,252,249,.65)}
+.rating-big{display:flex;align-items:center;gap:16px}
+.rating-big b{font-family:var(--display);font-size:64px;font-weight:800;color:var(--yellow);line-height:1}
+.stars{color:var(--yellow);letter-spacing:2px;font-size:16px}
+.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.t-card{background:var(--navy-2);border:1.5px solid rgba(255,255,255,.08);border-radius:26px;padding:28px;display:flex;flex-direction:column;gap:20px;transition:transform .3s,border-color .3s}
+.t-card:hover{transform:translateY(-4px);border-color:var(--yellow)}
+.t-card.hl{background:var(--yellow);color:var(--navy)}
+.t-card.hl .stars{color:var(--navy)}
+.t-card.hl .who small{color:rgba(14,27,61,.65)}
+.t-card blockquote{font-size:17px;line-height:1.55;flex:1}
+.t-card.big blockquote{font-family:var(--display);font-size:26px;font-weight:700;line-height:1.2;letter-spacing:-.01em}
+.who{display:flex;align-items:center;gap:12px}
+.avatar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-family:var(--display);background:var(--yellow);color:var(--navy);flex:none}
+.t-card.hl .avatar{background:var(--navy);color:var(--yellow)}
+.who b{display:block;font-size:15px}
+.who small{color:rgba(253,252,249,.55);font-size:13px}
+.t-card.big{grid-row:span 2}
+@media(max-width:960px){.t-grid{grid-template-columns:1fr 1fr}.t-card.big{grid-row:auto;grid-column:span 2}}
+@media(max-width:600px){.t-grid{grid-template-columns:1fr}.t-card.big{grid-column:auto}}
+
+/* LOKASI */
+.loc-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:22px}
+.loc-info{display:flex;flex-direction:column;gap:18px}
+.info-box{border-radius:26px;padding:28px;border:1.5px solid var(--line);background:var(--cream)}
+.info-box.hours{background:var(--yellow);border-color:var(--yellow)}
+.info-label{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+.status{font-size:12px;letter-spacing:.04em;padding:5px 11px;border-radius:99px;background:var(--navy);color:var(--white);opacity:1;display:inline-flex;gap:6px;align-items:center}
+.status i{width:7px;height:7px;border-radius:50%;background:#ff6b6b}
+.status.open i{background:var(--wa)}
+.hours-big{font-family:var(--display);font-weight:800;font-size:clamp(44px,5vw,60px);line-height:1;letter-spacing:-.03em}
+.hours-big span{font-size:20px;letter-spacing:0}
+.info-box p.addr{font-size:19px;font-weight:600;line-height:1.45}
+.loc-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.btn-navy{background:var(--navy);color:var(--white);padding:13px 20px;font-size:14px}
+.btn-navy:hover{background:var(--navy-3)}
+.btn-line{background:transparent;border:1.5px solid var(--navy);color:var(--navy);padding:12px 20px;font-size:14px}
+.map{border-radius:26px;overflow:hidden;border:1.5px solid var(--line);position:relative;min-height:440px;background:#E8ECF4}
+.map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:saturate(.85)}
+.map-chip{position:absolute;left:16px;bottom:16px;background:var(--navy);color:var(--white);padding:12px 16px;border-radius:16px;font-weight:700;font-size:14px;display:flex;align-items:center;gap:10px;box-shadow:0 10px 24px rgba(14,27,61,.3)}
+.map-chip:hover{background:var(--navy-3)}
+.map-chip i{font-style:normal;color:var(--yellow)}
+@media(max-width:900px){.loc-grid{grid-template-columns:1fr}}
+
+/* CTA BANNER */
+.cta-band{padding:0 0 110px}
+.cta-inner{background:var(--yellow);border-radius:36px;padding:64px;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center;position:relative;overflow:hidden}
+.cta-inner::after{content:"CANDU";position:absolute;right:-20px;bottom:-60px;font-family:var(--display);font-weight:800;font-size:220px;color:rgba(14,27,61,.06);letter-spacing:-.04em;pointer-events:none}
+.cta-inner h2{font-size:clamp(36px,4.6vw,58px);font-weight:800;max-width:640px}
+.cta-inner p{margin-top:12px;font-size:17px;color:rgba(14,27,61,.75)}
+.cta-inner .btn{background:var(--navy);color:var(--white);box-shadow:0 6px 0 #050B1D;position:relative;z-index:1}
+@media(max-width:760px){.cta-inner{grid-template-columns:1fr;padding:40px 28px}}
+
+/* FOOTER */
+footer{background:var(--navy);color:var(--white);padding:80px 0 36px}
+.foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:50px;border-bottom:1px solid rgba(255,255,255,.12)}
+.foot-top p{color:rgba(253,252,249,.6);margin-top:16px;max-width:320px;font-size:15px}
+.foot-col h4{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--yellow);margin-bottom:18px}
+.contact{display:flex;align-items:center;gap:12px;padding:12px 0;font-weight:600;transition:color .2s}
+.contact:hover{color:var(--yellow)}
+.contact .c-ico{width:40px;height:40px;border-radius:12px;background:var(--navy-2);display:grid;place-items:center;flex:none}
+.contact small{display:block;font-weight:500;font-size:12px;color:rgba(253,252,249,.5)}
+.foot-col ul{list-style:none}
+.foot-col li a{display:block;padding:7px 0;color:rgba(253,252,249,.75);transition:color .2s}
+.foot-col li a:hover{color:var(--yellow)}
+.foot-bottom{display:flex;justify-content:space-between;padding-top:28px;font-size:13px;color:rgba(253,252,249,.45);flex-wrap:wrap;gap:10px}
+.foot-giant{font-family:var(--display);font-weight:800;font-size:clamp(80px,17vw,230px);letter-spacing:-.05em;line-height:.85;color:var(--navy-2);margin-top:40px;text-align:center;user-select:none}
+.foot-giant span{color:var(--yellow)}
+@media(max-width:800px){.foot-top{grid-template-columns:1fr}}
+
+/* FLOATING WA */
+.float-wa{position:fixed;right:24px;bottom:24px;z-index:100;display:flex;align-items:center;gap:0;background:var(--wa);color:#fff;border-radius:999px;height:64px;padding:0 20px;box-shadow:0 12px 30px rgba(37,211,102,.45);font-weight:700;transition:gap .3s,padding .3s}
+.float-wa .wa-ico{width:26px;height:26px}
+.float-wa .lbl{max-width:0;overflow:hidden;white-space:nowrap;transition:max-width .35s}
+.float-wa:hover{gap:10px}
+.float-wa:hover .lbl{max-width:200px}
+.float-wa::before{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--wa);z-index:-1;animation:ring 2s infinite}
+@keyframes ring{from{transform:scale(1);opacity:.6}to{transform:scale(1.5);opacity:0}}
+.float-wa .bubble{position:absolute;right:0;bottom:78px;background:var(--white);color:var(--navy);padding:12px 16px;border-radius:16px 16px 4px 16px;font-size:14px;white-space:nowrap;box-shadow:0 10px 30px rgba(14,27,61,.2);animation:bubble 6s 2s both}
+@keyframes bubble{0%{opacity:0;transform:translateY(8px)}8%,85%{opacity:1;transform:none}100%{opacity:0;transform:translateY(8px);visibility:hidden}}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35M12.05 21.5h-.01a9.43 9.43 0 0 1-4.81-1.32l-.35-.2-3.57.93.95-3.48-.22-.36a9.43 9.43 0 0 1-1.45-5.03c0-5.21 4.24-9.45 9.46-9.45 2.53 0 4.9.99 6.69 2.78a9.4 9.4 0 0 1 2.77 6.69c0 5.21-4.24 9.45-9.46 9.45m8.05-17.5A11.3 11.3 0 0 0 12.05.67C5.78.67.67 5.78.67 12.05c0 2 .52 3.96 1.52 5.69L.57 23.67l6.07-1.59a11.4 11.4 0 0 0 5.4 1.38h.01c6.27 0 11.38-5.11 11.38-11.38 0-3.04-1.18-5.9-3.33-8.05"/></symbol>
+</svg>
+
+<!-- NAV -->
+<nav>
+  <div class="wrap">
+    <a href="#top" class="logo"><span class="logo-mark">☕</span>Kopi Candu</a>
+    <div class="nav-links">
+      <a href="#kenapa">Kenapa Kami</a>
+      <a href="#menu">Menu</a>
+      <a href="#ulasan">Ulasan</a>
+      <a href="#lokasi">Lokasi</a>
+    </div>
+    <a class="btn btn-yellow nav-cta wa-link" data-msg="Halo Kopi Candu! Mau pesan dong 🙌"><svg class="wa-ico"><use href="#wa"/></svg>Pesan</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top" data-screen-label="01 Hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow"><span class="dot"></span>Buka setiap hari · 15.00–18.30</span>
+      <h1>Sekali seruput, <span class="hl">auto candu.<svg viewBox="0 0 300 16" preserveAspectRatio="none"><path d="M3 12 C 80 2, 200 2, 297 9" stroke="#FFC531" stroke-width="5" fill="none" stroke-linecap="round"/></svg></span></h1>
+      <p class="lead">Kopi &amp; non-kopi kekinian dari Lebaksiu, Tegal. Creamy, manisnya pas, harganya ramah buat dompet pelajar — mulai Rp 7.000 aja.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-yellow wa-link" data-msg="Halo Kopi Candu! Saya mau pesan, boleh minta info menu hari ini? ☕"><svg class="wa-ico"><use href="#wa"/></svg>Pesan via WhatsApp</a>
+        <a href="#menu" class="btn btn-ghost">Lihat Menu →</a>
+      </div>
+      <div class="hero-meta">
+        <div><b>10</b><span>Varian menu</span></div>
+        <div><b>7rb</b><span>Harga mulai</span></div>
+        <div><b>4.9★</b><span>Kata pelanggan</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <image-slot id="hero-banner" shape="rounded" radius="36" placeholder="Foto banner produk andalan (mis. Spanish Latte)"></image-slot>
+      <div class="price-badge"><div><small>Mulai</small><b>7rb</b><small>aja!</small></div></div>
+      <div class="hero-tag"><i>⭐</i>Best seller: Spanish Latte</div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track" id="marquee"></div>
+</div>
+
+<!-- VALUES -->
+<section class="values" id="kenapa" data-screen-label="02 Kelebihan">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="kicker">Kenapa Kopi Candu?</span>
+        <h2>Alasan kenapa kamu bakal balik lagi (dan lagi).</h2>
+      </div>
+      <p>Kami racik setiap gelas dengan serius, biar nongkrongmu makin seru tanpa bikin kantong menjerit.</p>
+    </div>
+    <div class="val-grid">
+      <div class="val reveal">
+        <span class="val-num">01</span>
+        <div class="val-ico">🌱</div>
+        <h3>Bahan Berkualitas</h3>
+        <p>Biji kopi pilihan, susu segar, dan gula aren asli. Rasa konsisten di setiap gelas.</p>
+      </div>
+      <div class="val feature reveal">
+        <span class="val-num" style="color:var(--navy)">02</span>
+        <div class="val-ico">💸</div>
+        <div class="big">Rp 7.000</div>
+        <h3>Nikmat &amp; Ramah di Kantong</h3>
+        <p style="color:rgba(14,27,61,.75)">Rasa kafe premium, harga sahabat uang jajan.</p>
+      </div>
+      <div class="val reveal">
+        <span class="val-num">03</span>
+        <div class="val-ico">📸</div>
+        <h3>Instagramable</h3>
+        <p>Cup &amp; tampilan minuman yang cakep. Siap jadi konten story kamu hari ini.</p>
+      </div>
+      <div class="val reveal">
+        <span class="val-num">04</span>
+        <div class="val-ico">📱</div>
+        <h3>Gampang Dipesan</h3>
+        <p>Tinggal chat WhatsApp, pilih menu, langsung kami siapkan. Tanpa ribet, tanpa antre.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu" id="menu" data-screen-label="03 Katalog">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="kicker">Katalog Menu</span>
+        <h2>Pilih candu favoritmu.</h2>
+      </div>
+      <div class="tabs" role="tablist">
+        <span class="tab-pill" id="pill"></span>
+        <button class="tab active" data-cat="kopi" role="tab">☕ Kopi <span class="count">7</span></button>
+        <button class="tab" data-cat="nonkopi" role="tab">🥤 Non-Kopi <span class="count">3</span></button>
+      </div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<!-- TESTIMONI -->
+<section class="testi" id="ulasan" data-screen-label="04 Testimoni">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="kicker">Kata Mereka</span>
+        <h2>Udah banyak yang kecanduan.</h2>
+      </div>
+      <div class="rating-big">
+        <b>4.9</b>
+        <div><div class="stars">★★★★★</div><span style="color:rgba(253,252,249,.65);font-size:14px">dari pelanggan setia Kopi Candu</span></div>
+      </div>
+    </div>
+    <div class="t-grid">
+      <div class="t-card hl big reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Spanish Latte-nya creamy parah, manisnya pas. Harga 12rb tapi rasanya kayak kafe di kota. Fix langganan!"</blockquote>
+        <div class="who"><span class="avatar">NA</span><div><b>Nadia A.</b><small>Mahasiswi · Tegal</small></div></div>
+      </div>
+      <div class="t-card reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Kopi Susu Gula Aren terenak di Lebaksiu. Wangi arennya kerasa banget."</blockquote>
+        <div class="who"><span class="avatar">RF</span><div><b>Rizky F.</b><small>Pelajar SMA</small></div></div>
+      </div>
+      <div class="t-card reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Milo Lava wajib coba! Cokelatnya lumer, anak-anak di rumah juga suka."</blockquote>
+        <div class="who"><span class="avatar">SL</span><div><b>Siti L.</b><small>Ibu muda · Lebaksiu</small></div></div>
+      </div>
+      <div class="t-card reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Pesan lewat WA cepet banget dibales. Tinggal ambil, udah siap. Praktis!"</blockquote>
+        <div class="who"><span class="avatar">DP</span><div><b>Dimas P.</b><small>Karyawan</small></div></div>
+      </div>
+      <div class="t-card reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Matcha Latte-nya nggak pahit, lembut. Cup-nya juga lucu buat difoto 📸"</blockquote>
+        <div class="who"><span class="avatar">AY</span><div><b>Ayu Y.</b><small>Content creator</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOKASI -->
+<section id="lokasi" data-screen-label="05 Lokasi">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="kicker">Lokasi &amp; Jam Buka</span>
+        <h2>Mampir sore-sore, yuk.</h2>
+      </div>
+      <p>Spot ngopi santai buat nemenin sore kamu sepulang sekolah, kuliah, atau kerja.</p>
+    </div>
+    <div class="loc-grid">
+      <div class="loc-info">
+        <div class="info-box hours reveal">
+          <div class="info-label">Jam Operasional <span class="status" id="status"><i></i><em style="font-style:normal">—</em></span></div>
+          <div class="hours-big">15.00 – 18.30 <span>WIB</span></div>
+          <p style="margin-top:10px;font-weight:600">Buka setiap hari</p>
+        </div>
+        <div class="info-box reveal">
+          <div class="info-label">Alamat</div>
+          <p class="addr">Pesawahan, Lebaksiu Kidul, Kec. Lebaksiu, Kabupaten Tegal, Jawa Tengah</p>
+          <div class="loc-actions">
+            <a class="btn btn-navy" href="https://maps.app.goo.gl/Fq7Xp6KDvessySKS6" target="_blank" rel="noopener">📍 Buka di Google Maps</a>
+            <a class="btn btn-line wa-link" data-msg="Halo Kopi Candu! Mau tanya arah lokasinya dong 📍">Tanya Arah</a>
+          </div>
+        </div>
+      </div>
+      <div class="map reveal">
+        <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Peta lokasi Kopi Candu"
+          src="https://www.google.com/maps?q=Pesawahan,+Lebaksiu+Kidul,+Lebaksiu,+Tegal,+Jawa+Tengah&z=15&output=embed"></iframe>
+        <a class="map-chip" href="https://maps.app.goo.gl/Fq7Xp6KDvessySKS6" target="_blank" rel="noopener"><i>●</i>Kopi Candu · Lebaksiu Kidul ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div class="wrap">
+    <div class="cta-inner reveal">
+      <div>
+        <h2>Lagi pengen yang seger &amp; creamy?</h2>
+        <p>Chat sekarang, pesananmu langsung kami siapkan.</p>
+      </div>
+      <a class="btn wa-link" data-msg="Halo Kopi Candu! Saya mau pesan sekarang 🙌"><svg class="wa-ico"><use href="#wa"/></svg>Pesan via WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer data-screen-label="06 Footer">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <a href="#top" class="logo"><span class="logo-mark">☕</span>Kopi Candu</a>
+        <p>Kopi &amp; non-kopi kekinian dengan rasa nikmat dan harga bersahabat. Dari Lebaksiu untuk kamu.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Kontak</h4>
+        <a class="contact wa-link" data-msg="Halo Kopi Candu!"><span class="c-ico"><svg class="wa-ico" style="color:var(--wa)"><use href="#wa"/></svg></span><span><small>WhatsApp</small>+62 856-0397-4619</span></a>
+        <a class="contact" href="https://instagram.com/kopicandu666" target="_blank" rel="noopener"><span class="c-ico" style="color:var(--yellow);font-weight:800">IG</span><span><small>Instagram</small>@kopicandu666</span></a>
+      </div>
+      <div class="foot-col">
+        <h4>Jelajahi</h4>
+        <ul>
+          <li><a href="#kenapa">Kenapa Kami</a></li>
+          <li><a href="#menu">Menu &amp; Harga</a></li>
+          <li><a href="#ulasan">Ulasan</a></li>
+          <li><a href="#lokasi">Lokasi &amp; Jam Buka</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-giant">Kopi<span>.</span>Candu</div>
+    <div class="foot-bottom">
+      <span>© 2026 Kopi Candu. Semua hak dilindungi.</span>
+      <span>Buka setiap hari 15.00 – 18.30 WIB</span>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WA -->
+<a class="float-wa wa-link" data-msg="Halo Kopi Candu! Saya mau pesan ☕" aria-label="Chat WhatsApp">
+  <span class="bubble">Haus? Pesan di sini aja 👋</span>
+  <svg class="wa-ico"><use href="#wa"/></svg><span class="lbl">Chat WhatsApp</span>
+</a>
+
+<script>
+const WA = '6285603974619';
+const waUrl = msg => `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+
+const MENU = {
+  kopi: [
+    {n:'Spanish Latte', p:12000, d:'Espresso, susu segar & susu kental manis. Creamy, manis legit.', tag:'Best Seller'},
+    {n:'Coffee Latte', p:10000, d:'Klasik dan lembut. Espresso berpadu susu yang smooth.'},
+    {n:'Kopiko Latte', p:10000, d:'Rasa permen kopi favorit, versi latte dingin yang nagih.', tag:'Unik'},
+    {n:'Kopi Susu Creamy', p:12000, d:'Kopi susu dengan tekstur ekstra creamy di setiap seruput.'},
+    {n:'Kopi Susu Gula Aren', p:12000, d:'Gula aren asli, wangi karamel alami yang khas.', tag:'Favorit'},
+    {n:'Americano', p:7000, d:'Bold, clean, tanpa basa-basi. Buat pecinta kopi murni.', tag:'Termurah'},
+    {n:'Brown Sugar Kopi Latte', p:12000, d:'Sirup brown sugar karamel berlapis kopi & susu.'},
+  ],
+  nonkopi: [
+    {n:'Matcha Latte', p:13000, d:'Matcha lembut, tidak pahit, dengan susu segar.', tag:'Hits'},
+    {n:'Milo Lava', p:12000, d:'Milo kental dengan topping Milo yang lumer. Cokelat banget!', tag:'Best Seller'},
+    {n:'Signature Chocolate', p:12000, d:'Cokelat premium racikan khas Kopi Candu. Rich & creamy.'},
+  ]
+};
+const rp = n => n.toLocaleString('id-ID');
+const waSvg = '<svg class="wa-ico"><use href="#wa"/></svg>';
+
+function slug(s){return s.toLowerCase().replace(/[^a-z0-9]+/g,'-')}
+function render(cat){
+  const g = document.getElementById('grid');
+  g.innerHTML = MENU[cat].map((m,i)=>`
+    <article class="card ${cat}" style="animation-delay:${i*60}ms">
+      <div class="card-img">
+        ${m.tag?`<span class="card-tag">${m.tag}</span>`:''}
+        <image-slot id="menu-${slug(m.n)}" shape="rounded" radius="18" placeholder="Foto ${m.n}"></image-slot>
+      </div>
+      <div class="card-body">
+        <h3>${m.n}</h3>
+        <p class="desc">${m.d}</p>
+        <div class="card-foot">
+          <span class="price"><small>Rp</small>${rp(m.p)}</span>
+          <a class="order" href="${waUrl(`Halo Kopi Candu! Saya mau order *${m.n}* (Rp ${rp(m.p)}) 1 cup ya ☕`)}" target="_blank" rel="noopener">${waSvg}Order</a>
+        </div>
+      </div>
+    </article>`).join('');
+}
+
+// tabs
+const tabs = [...document.querySelectorAll('.tab')], pill = document.getElementById('pill');
+function movePill(t){pill.style.width=t.offsetWidth+'px';pill.style.transform=`translateX(${t.offsetLeft-6}px)`}
+tabs.forEach(t=>t.addEventListener('click',()=>{
+  tabs.forEach(x=>x.classList.toggle('active',x===t));
+  movePill(t); render(t.dataset.cat);
+  localStorage.setItem('kc-tab',t.dataset.cat);
+}));
+const saved = localStorage.getItem('kc-tab')||'kopi';
+const startTab = tabs.find(t=>t.dataset.cat===saved)||tabs[0];
+tabs.forEach(x=>x.classList.toggle('active',x===startTab));
+render(startTab.dataset.cat);
+document.fonts.ready.then(()=>movePill(startTab));
+addEventListener('resize',()=>movePill(document.querySelector('.tab.active')));
+
+// wa links
+document.querySelectorAll('.wa-link').forEach(a=>{a.href=waUrl(a.dataset.msg||'Halo Kopi Candu!');a.target='_blank';a.rel='noopener'});
+
+// marquee
+const words=['Spanish Latte','Kopi Susu Gula Aren','Matcha Latte','Milo Lava','Americano 7rb','Brown Sugar Latte','Signature Chocolate'];
+const half=words.map(w=>`<span>${w}</span>`).join('');
+document.getElementById('marquee').innerHTML=half+half;
+
+// open status (WIB = UTC+7)
+(function(){
+  const now=new Date(), wib=new Date(now.getTime()+(now.getTimezoneOffset()+420)*60000);
+  const m=wib.getHours()*60+wib.getMinutes(), open=m>=900&&m<1110;
+  const s=document.getElementById('status');
+  s.classList.toggle('open',open);
+  s.querySelector('em').textContent=open?'Sedang buka':'Tutup sekarang';
+})();
+
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4)*80+'ms';io.observe(el)});
+</script>
+</body>
+</html>
